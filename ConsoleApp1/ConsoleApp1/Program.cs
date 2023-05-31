@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System;
+using System.Timers;
 
 namespace PrimeraAplicacion // 
 {
@@ -7,47 +8,31 @@ namespace PrimeraAplicacion //
     {
         static void Main(string[] args)
         {
-            function();
-            Console.WriteLine("Ingrese el primer número");
-            int num1 = int.Parse(Console.ReadLine());
-            Console.WriteLine("Ingrese el segundo número");
-            int num2 = int.Parse(Console.ReadLine());
-            validacion(num1, num2)
-            ;
-        }
-        static void function()
-        {
-            Console.WriteLine("holis");
-        }
-
-        static int sumaNumeros(int num1, int num2)
-        {
-            int suma = num1 + num2;
-            return suma;
-        }
-
-        static void validacion(int num1, int num2)
-        {
-            Console.WriteLine($"Está seguro que los números deben ser {num1} y {num2}?");
-            if (Console.ReadLine() == "si")
+            int aleatory = aleatoryNumb();
+            Console.WriteLine("Ingresa un número y te diremos si es menor o mayor al aleatorio");
+            int userNumber = int.Parse(Console.ReadLine());
+            while(userNumber != aleatory)
             {
-                int resultado = sumaNumeros(num1, num2);
-                Console.WriteLine($"El resultado de la suma es {resultado}");
-            }
-            else
-            {
-                Console.WriteLine("qué numero desea modificar");
-                if (Console.ReadLine() == "1")
+                if(aleatory < userNumber)
                 {
-                    Console.WriteLine("Ingrese el valor del primer número");
-                    num1 = int.Parse(Console.ReadLine());
-                } else
+                    Console.WriteLine("el numero ingresado es mayor al aleatorio");
+                    Console.WriteLine("Ingresa otro numero");
+                    userNumber = int.Parse(Console.ReadLine());
+                } 
+                else if (aleatory > userNumber)
                 {
-                    Console.WriteLine("Ingrese el valor del primer número");
-                    num2 = int.Parse(Console.ReadLine());
+                    Console.WriteLine("el numero ingresado es menor al aleatorio");
+                    Console.WriteLine("Ingresa otro numero");
+                    userNumber = int.Parse(Console.ReadLine());
                 }
-                validacion(num1, num2);
             }
+            Console.WriteLine("felicidades el numero ingresado es el correcto");
+        }
+        
+        static int aleatoryNumb()
+        {
+            Random num = new Random();
+            return num.Next(0, 100);
         }
     }
 }
